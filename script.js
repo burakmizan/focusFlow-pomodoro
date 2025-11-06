@@ -61,13 +61,18 @@ const THEMES = {
   tokyo:  "url('https://r.resimlink.com/acKrP.jpg')",
   arctic: "url('https://r.resimlink.com/z1PDjBNls.jpg')",
   forest: "url('https://r.resimlink.com/5S-J7IWLH.jpg')",
-  aurora: "url('https://r.resimlink.com/XlyuisnOYa.jpg')"
+  aurora: "url('https://r.resimlink.com/XlyuisnOYa.jpg')",
+  anime: "url('https://r.resimlink.com/JlyQjct_7.jpg')",
+  aura: "url('https://r.resimlink.com/B6lxpkiPGg.jpg')",
+  italy: "url('https://r.resimlink.com/O_Ck73JbR.jpg')",
+  milky: "url('https://r.resimlink.com/Xv24z6ES3pi.jpg')",
+  northern: "url('https://r.resimlink.com/dYRjmQAi5S.jpg')"
 };
 
 const SOUNDS = {
-  bell:  "https://pixabay.com/sound-effects/single-church-bell-2-352062/",
-  soft:  "https://cdn.jsdelivr.net/gh/itsbaba-dev/assets/audio/soft-ping.mp3",
-  alert: "https://cdn.jsdelivr.net/gh/itsbaba-dev/assets/audio/alert-tone.mp3"
+  bell:  "https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg",
+  soft:  "https://actions.google.com/sounds/v1/alarms/radiation_meter.ogg",
+  alert: "https://actions.google.com/sounds/v1/alarms/spaceship_alarm.ogg"
 };
 
 function fmt(secs){
@@ -251,7 +256,7 @@ resetAll.addEventListener('click', ()=>{
 // Keyboard: space start/pause, r reset, Shift+T -> test
 window.addEventListener('keydown', (e)=>{
   if(e.code==='Space'){ e.preventDefault(); state.running?stop():start(); }
-  if(e.key.toLowerCase()==='r') reset();x
+  if(e.key.toLowerCase()==='r') reset();
   if(e.shiftKey && e.key.toLowerCase()==='t'){ state.secsLeft = Number(state.settings.durations.testSec); renderTimer(); }
 });
 
