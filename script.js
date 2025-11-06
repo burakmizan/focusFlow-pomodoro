@@ -65,7 +65,7 @@ const THEMES = {
   anime: "url('https://r.resimlink.com/JlyQjct_7.jpg')",
   aura: "url('https://r.resimlink.com/B6lxpkiPGg.jpg')",
   italy: "url('https://r.resimlink.com/O_Ck73JbR.jpg')",
-  milky: "url('https://r.resimlink.com/Xv24z6ES3pi.jpg')",
+  milky: "url('https://r.resimlink.com/Y7eaw.jpg')",
   northern: "url('https://r.resimlink.com/dYRjmQAi5S.jpg')"
 };
 
@@ -264,6 +264,60 @@ window.addEventListener('keydown', (e)=>{
 if('Notification' in window && Notification.permission==='default'){
   Notification.requestPermission().catch(()=>{});
 }
+// ---------- To-Do List ----------
+const todoInput = document.getElementById("todoInput");
+const addTodo = document.getElementById("addTodo");
+const todoList = document.getElementById("todoList");
+
+function loadTodos() {
+  const todos = JSON.parse(localStorage.getItem("focusflow_todos") || "[]");
+  todos.forEach(addTodoItem);
+}
+
+function saveTodos() {
+  const todos = [];
+  document.querySelectorAll("#todoList li").forEach(li => {
+    todos.push({ text: li.querySelector("span").textContent, done: li.classList.contains("completed") });
+  });
+  localStorage.setItem("focusflow_todos", JSON.stringify(todos));
+}
+
+function addTodoItem(todo) {
+  const li = document.createElement("li");
+  const span = document.createElement("span");
+  span.textContent = todo.text;
+  li.appendChild(span);
+
+  const del = document.createElement("button");
+  del.innerHTML = '<i data-lucide="trash-2"></i>';
+  del.addEventListener("click", () => { li.remove(); saveTodos(); });
+  li.appendChild(del);
+
+  li.addEventListener("click", (e) => {
+    if (e.target.tagName !== "BUTTON" && e.target.tagName !== "I") {
+      li.classList.toggle("completed");
+      saveTodos();
+    }
+  });
+
+  if (todo.done) li.classList.add("completed");
+  todoList.appendChild(li);
+  lucide.createIcons();
+}
+
+addTodo.addEventListener("click", () => {
+  const text = todoInput.value.trim();
+  if (!text) return;
+  addTodoItem({ text, done: false });
+  saveTodos();
+  todoInput.value = "";
+});
+
+todoInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") addTodo.click();
+});
+
+loadTodos();
 
 // ---------- Boot ----------
 load();
