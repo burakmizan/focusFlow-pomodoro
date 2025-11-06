@@ -57,10 +57,11 @@ const spotifyFrame = document.getElementById('spotifyFrame');
 
 // ---------- Utils ----------
 const THEMES = {
-  seoul:  "url('https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=1920&auto=format&fit=crop')",
-  tokyo:  "url('https://images.unsplash.com/photo-1491884662610-dfcd28f30cf5?q=80&w=1920&auto=format&fit=crop')",
-  arctic: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1920&auto=format&fit=crop')",
-  forest: "url('https://images.unsplash.com/photo-1431794062232-2a99a5431c6c?q=80&w=1920&auto=format&fit=crop')"
+  seoul:  "url('https://r.resimlink.com/yu7wiPaqcHEK.jpg')",
+  tokyo:  "url('https://r.resimlink.com/acKrP.jpg')",
+  arctic: "url('https://r.resimlink.com/z1PDjBNls.jpg')",
+  forest: "url('https://r.resimlink.com/5S-J7IWLH.jpg')",
+  aurora: "url('https://r.resimlink.com/XlyuisnOYa.jpg')"
 };
 
 const SOUNDS = {
@@ -250,7 +251,7 @@ resetAll.addEventListener('click', ()=>{
 // Keyboard: space start/pause, r reset, Shift+T -> test
 window.addEventListener('keydown', (e)=>{
   if(e.code==='Space'){ e.preventDefault(); state.running?stop():start(); }
-  if(e.key.toLowerCase()==='r') reset();
+  if(e.key.toLowerCase()==='r') reset();x
   if(e.shiftKey && e.key.toLowerCase()==='t'){ state.secsLeft = Number(state.settings.durations.testSec); renderTimer(); }
 });
 
