@@ -9,38 +9,34 @@
   <link rel="icon" href="https://r.resimlink.com/avYU6.png">
 </head>
 <body>
-  <!-- BG -->
   <div id="bg" class="bg"></div>
   <div class="scrim"></div>
 
-  <!-- Header -->
+
   <header class="top">
     <div class="brand">focusflow.io <span class="by">by Burak Mizan</span></div>
   </header>
 
-  <!-- Main -->
+
   <main class="shell">
-    <!-- Modes -->
+
     <div class="modes" role="tablist">
       <button class="pill active" data-mode="pomodoro" role="tab">pomodoro</button>
       <button class="pill" data-mode="short" role="tab">short break</button>
       <button class="pill" data-mode="long" role="tab">long break</button>
     </div>
 
-    <!-- Timer -->
     <div id="timer" class="timer">25:00</div>
 
-    <!-- Cycle dots -->
+   
     <div id="cycles" class="cycles" aria-label="completed pomodoros"></div>
 
-    <!-- Controls -->
     <div class="controls">
       <button id="startBtn" class="cta primary">start</button>
       <button id="resetBtn" class="cta ghost" title="reset"><i data-lucide="refresh-ccw"></i></button>
       <button id="settingsBtn" class="cta ghost" title="settings"><i data-lucide="settings"></i></button>
     </div>
 
-    <!-- To-Do List -->
     <div class="todo">
      <h3>To Do List</h3>
        <div class="todo-input">
@@ -51,17 +47,14 @@
     </div>
 
 
-    <!-- Spotify -->
     <div id="spotifyWrap" class="spotify">
       <iframe id="spotifyFrame" style="border-radius:12px" width="320" height="80" frameborder="0"
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
     </div>
   </main>
 
-  <!-- Finish sound -->
   <audio id="finishSound" preload="auto"></audio>
 
-  <!-- Settings Modal -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="card">
       <div class="modal-head">
@@ -76,7 +69,7 @@
       </div>
 
       <div class="panes">
-        <!-- GENERAL -->
+
         <section id="pane-general" class="pane active">
           <label class="row">
             <span>Select theme</span>
@@ -115,7 +108,6 @@
           </label>
         </section>
 
-        <!-- TIMERS -->
         <section id="pane-timers" class="pane">
           <div class="grid2">
             <label class="row">
@@ -138,7 +130,6 @@
           <p class="hint">Mode “pomodoro/short/long” üstteki pill’lerden seçilir. Test için <b>Shift+T</b> → hızlı 30 sn.</p>
         </section>
 
-        <!-- SOUNDS -->
         <section id="pane-sounds" class="pane">
           <label class="row">
             <span>Select alert sound</span>

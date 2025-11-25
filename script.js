@@ -1,12 +1,12 @@
-// ---------- State & Defaults ----------
+
 const state = {
   mode: 'pomodoro',
   running: false,
   secsLeft: 25*60,
-  cyclesDone: 0,                 // completed pomodoros in current set
+  cyclesDone: 0,                 
   settings: {
     durations: { pomodoro: 25, short: 5, long: 15, testSec: 30 },
-    sequence: true,              // 4× pomodoro -> long break
+    sequence: true,              
     notifyOnFinish: true,
     soundOnFinish: true,
     sound: 'bell',
@@ -19,7 +19,6 @@ const state = {
 
 let tick = null;
 
-// ---------- DOM ----------
 const bg = document.getElementById('bg');
 const pills = document.querySelectorAll('.pill');
 const timerEl = document.getElementById('timer');
@@ -55,7 +54,6 @@ const finishSound = document.getElementById('finishSound');
 const spotifyWrap = document.getElementById('spotifyWrap');
 const spotifyFrame = document.getElementById('spotifyFrame');
 
-// ---------- Utils ----------
 const THEMES = {
   seoul:  "url('https://r.resimlink.com/yu7wiPaqcHEK.jpg')",
   tokyo:  "url('https://r.resimlink.com/acKrP.jpg')",
@@ -132,20 +130,17 @@ function reset(){
 }
 
 function onFinish(){
-  // sound
   if(state.settings.soundOnFinish){
     finishSound.src = SOUNDS[state.settings.sound];
     finishSound.volume = state.settings.volume;
     finishSound.currentTime = 0;
     finishSound.play().catch(()=>{});
   }
-  // notification
   if(state.settings.notifyOnFinish && 'Notification' in window){
     if(Notification.permission==='granted'){
       new Notification('FocusFlow', { body: 'Timer finished!', icon: '/favicon.ico' });
     }
   }
-  // sequence logic
   if(state.settings.sequence){
     if(state.mode==='pomodoro'){
       state.cyclesDone++;
@@ -171,7 +166,6 @@ function applySpotify(){
   }
 }
 
-// ---------- Persist ----------
 function load(){
   try{
     const raw = localStorage.getItem('focusflow_v2');
@@ -181,7 +175,6 @@ function load(){
       state.cyclesDone = saved.cyclesDone||0;
     }
   }catch{}
-  // init UI
   themeSelect.value = state.settings.theme;
   notifToggle.checked = state.settings.notifyOnFinish;
   sequenceToggle.checked = state.settings.sequence;
@@ -203,7 +196,6 @@ function load(){
 }
 
 function save(){
-  // read UI back
   state.settings.theme            = themeSelect.value;
   state.settings.notifyOnFinish   = notifToggle.checked;
   state.settings.sequence         = sequenceToggle.checked;
@@ -228,7 +220,6 @@ function save(){
 
 function clampNum(v,min,max){ v=Number(v); if(isNaN(v)) v=min; return Math.min(Math.max(v,min),max); }
 
-// ---------- Events ----------
 pills.forEach(p=>p.addEventListener('click',()=>{
   pills.forEach(x=>x.classList.remove('active'));
   p.classList.add('active');
@@ -253,18 +244,15 @@ resetAll.addEventListener('click', ()=>{
   localStorage.removeItem('focusflow_v2'); location.reload();
 });
 
-// Keyboard: space start/pause, r reset, Shift+T -> test
 window.addEventListener('keydown', (e)=>{
   if(e.code==='Space'){ e.preventDefault(); state.running?stop():start(); }
   if(e.key.toLowerCase()==='r') reset();
   if(e.shiftKey && e.key.toLowerCase()==='t'){ state.secsLeft = Number(state.settings.durations.testSec); renderTimer(); }
 });
 
-// Notifications permission
 if('Notification' in window && Notification.permission==='default'){
   Notification.requestPermission().catch(()=>{});
 }
-// ---------- To-Do List ----------
 const todoInput = document.getElementById("todoInput");
 const addTodo = document.getElementById("addTodo");
 const todoList = document.getElementById("todoList");
@@ -319,6 +307,5 @@ todoInput.addEventListener("keypress", (e) => {
 
 loadTodos();
 
-// ---------- Boot ----------
 load();
 lucide.createIcons();

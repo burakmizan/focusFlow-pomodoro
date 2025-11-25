@@ -8,7 +8,6 @@
   --accent:#ADEED9;
 }
 
-/* base */
 *{box-sizing:border-box}
 html,body{height:100%}
 body{
@@ -37,7 +36,6 @@ body{
 
 .shell{display:flex; flex-direction:column; align-items:center; gap:22px; margin-top:4vh}
 
-/* modes */
 .modes{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
 .pill{
   border-radius:28px; padding:10px 18px; border:1px solid var(--pill-br);
@@ -47,18 +45,15 @@ body{
 .pill:hover{transform:translateY(-1px); box-shadow:0 6px 16px var(--shadow)}
 .pill.active{background:#fff; color:#222}
 
-/* timer */
 .timer{
   font-size:160px; font-weight:800; text-shadow:0 8px 36px rgba(0,0,0,.5);
   letter-spacing:2px; line-height:1;
 }
 
-/* cycles */
 .cycles{display:flex; gap:8px; min-height:14px}
 .cycles .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.55)}
 .cycles .dot.done{background:linear-gradient(135deg,var(--primary),var(--secondary)); box-shadow:0 0 10px var(--accent)}
 
-/* controls */
 .controls{display:flex; gap:12px; align-items:center}
 .cta{
   border:none; cursor:pointer; font-weight:700; border-radius:26px; padding:12px 22px;
@@ -69,11 +64,9 @@ body{
 .cta:hover{transform:translateY(-1px); box-shadow:0 10px 22px var(--shadow)}
 .icon-btn{background:transparent; border:none; color:#fff; cursor:pointer}
 
-/* spotify */
 .spotify{position:fixed; left:20px; bottom:20px}
 .spotify iframe{border:none}
 
-/* modal */
 .modal{position:fixed; inset:0; display:none; align-items:center; justify-content:center;
   background:rgba(0,0,0,.45); backdrop-filter: blur(4px);}
 .modal.show{display:flex}
@@ -103,7 +96,6 @@ body{
   color:#ffffff;
 }
 
-/* 🔧 dropdown görünürlüğü düzeltmesi */
 .row select option {
   background-color:#0e0f18;
   color:#ffffff;
@@ -120,7 +112,6 @@ body{
 .cta.primary{background:linear-gradient(135deg,var(--primary),var(--secondary))}
 .cta.primary:hover{box-shadow:0 0 20px var(--accent)}
 
-/* ---- To-Do List ---- */
 .todo {
   position: fixed;
   right: 40px;
@@ -201,7 +192,6 @@ body{
 }
 #todoList li button:hover { opacity: 1; }
 
-/* --- Responsive Design --- */
 @media (max-width: 1024px) {
   .todo {
     right: 20px;
