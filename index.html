@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FocusFlow</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="icon" href="https://r.resimlink.com/avYU6.png">
+</head>
+<body>
+  <div id="bg" class="bg"></div>
+  <div class="scrim"></div>
+
+  <header class="top">
+    <div class="brand">focusflow.io <span class="by">by Burak Mizan</span></div>
+  </header>
+
+  <main class="shell">
+    <div class="modes" role="tablist">
+      <button class="pill active" data-mode="pomodoro" role="tab">pomodoro</button>
+      <button class="pill" data-mode="short" role="tab">short break</button>
+      <button class="pill" data-mode="long" role="tab">long break</button>
+    </div>
+
+    <div id="timer" class="timer">25:00</div>
+   
+    <div id="cycles" class="cycles" aria-label="completed pomodoros"></div>
+    
+    <div id="dailyStats" class="daily-pill">
+      <i data-lucide="flame" class="flame-icon"></i>
+      <span id="dailyCountDisplay">0</span>
+      <span class="daily-label">Daily Focus</span>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn" class="cta primary">Start</button>
+      <button id="resetBtn" class="cta ghost" title="reset"><i data-lucide="refresh-ccw"></i></button>
+      <button id="settingsBtn" class="cta ghost" title="settings"><i data-lucide="settings"></i></button>
+    </div>
+
+    <div class="todo">
+     <h3>To Do List</h3>
+       <div class="todo-input">
+        <input id="todoInput" type="text" placeholder="Add a new task..." />
+        <button id="addTodo"><i data-lucide="plus"></i></button>
+      </div>
+     <ul id="todoList"></ul>
+    </div>
+
+    <div id="spotifyWrap" class="spotify">
+      <iframe id="spotifyFrame" style="border-radius:12px" width="320" height="80" frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+  </main>
+
+  <audio id="finishSound" preload="auto"></audio>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="card">
+      <div class="modal-head">
+        <h2>Settings</h2>
+        <button id="closeModal" class="icon-btn"><i data-lucide="x"></i></button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="general">General</button>
+        <button class="tab" data-tab="timers">Timers</button>
+        <button class="tab" data-tab="sounds">Sounds</button>
+      </div>
+
+      <div class="panes">
+        <section id="pane-general" class="pane active">
+          <label class="row">
+            <span>Select theme</span>
+            <select id="themeSelect">
+              <optgroup label="Static Images">
+                <option value="seoul">Seoul Sunrise</option>
+                <option value="tokyo">Tokyo Night</option>
+                <option value="arctic">Arctic Focus</option>
+                <option value="forest">Forest Mist</option>
+                <option value="aurora">Aurora Lights</option>
+                <option value="anime">Anime</option>
+                <option value="aura">Aura</option>
+                <option value="italy">Italy Mountains</option>
+                <option value="milky">Milky Way</option>
+                <option value="northern">Northern Lights</option>
+              </optgroup>
+              <optgroup label="Live Backgrounds (GIF)">
+                <option value="retro_sunset">👾 Pixel Sunset</option>
+                <option value="anime_sky">🍃 Anime Sky</option>
+                <option value="chill_day">☁️ Chill Day</option>
+                <option value="pixel_adventure">⚔️ Secret Garden</option>
+                <option value="study_mode">⌨️ Study Mode</option>
+              </optgroup>
+            </select>
+          </label>
+
+          <label class="row switch">
+            <span>Show browser notification when timer finishes</span>
+            <input type="checkbox" id="notifToggle">
+          </label>
+
+          <label class="row switch">
+            <span>Use Pomodoro sequence</span>
+            <input type="checkbox" id="sequenceToggle" checked>
+          </label>
+
+          <label class="row switch">
+            <span>Show Spotify playlist</span>
+            <input type="checkbox" id="spotifyToggle" checked>
+          </label>
+
+          <label class="row">
+            <span>Spotify playlist URL</span>
+            <input id="spotifyUrl" type="url" placeholder="Spotify URL...">
+          </label>
+        </section>
+
+        <section id="pane-timers" class="pane">
+          <div class="grid2">
+            <label class="row">
+              <span>Pomodoro (min)</span>
+              <input id="pomodoroMin" type="number" min="1" value="25">
+            </label>
+            <label class="row">
+              <span>Short break (min)</span>
+              <input id="shortMin" type="number" min="1" value="5">
+            </label>
+            <label class="row">
+              <span>Long break (min)</span>
+              <input id="longMin" type="number" min="1" value="15">
+            </label>
+            <label class="row">
+              <span>Test (sec)</span>
+              <input id="testSec" type="number" min="5" value="30">
+            </label>
+          </div>
+          <p class="hint">Test için <b>Shift+T</b> → 30 sn.</p>
+        </section>
+
+        <section id="pane-sounds" class="pane">
+          <label class="row">
+            <span>Select alert sound</span>
+            <select id="soundSelect">
+              <option value="bell">Bell</option>
+              <option value="soft">Radiation Meter</option>
+              <option value="alert">Space Alert</option>
+            </select>
+          </label>
+          <label class="row switch">
+            <span>Play sound when timer finishes</span>
+            <input type="checkbox" id="soundToggle" checked>
+          </label>
+          <label class="row">
+            <span>Alert volume</span>
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.7">
+          </label>
+        </section>
+      </div>
+
+      <div class="modal-foot">
+        <button id="resetAll" class="cta ghost">Reset all</button>
+        <button id="saveBtn" class="cta primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
